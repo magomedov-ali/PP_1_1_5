@@ -3,22 +3,13 @@ package jm.task.core.jdbc.dao;
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
 
-import java.net.ConnectException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
 
-    private Connection connection;
-
-    {
-        try {
-            connection = Util.getConnection();
-        } catch (ConnectException e) {
-            System.out.println("Connection is failed!!!");
-        }
-    }
+    private Connection connection = Util.getConnection();
 
     public UserDaoJDBCImpl() {
 
@@ -37,8 +28,7 @@ public class UserDaoJDBCImpl implements UserDao {
 //            System.out.println("Table was created.");
 
         } catch (SQLException e) {
-            System.out.println("Some error was occurred while creating a table!!!");
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
     }
@@ -52,8 +42,7 @@ public class UserDaoJDBCImpl implements UserDao {
 //            System.out.println("Table was dropped");
 
         } catch (SQLException e) {
-            System.out.println("Some error was occurred while dropping the table!!!");
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
     }
@@ -83,8 +72,7 @@ public class UserDaoJDBCImpl implements UserDao {
                     " was added to database");
 
         } catch (SQLException e) {
-            System.out.println("Some error was occurred while saving a user!!!");
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
     }
@@ -102,8 +90,7 @@ public class UserDaoJDBCImpl implements UserDao {
 //            System.out.println("User with id " + id + " was removed from database");
 
         } catch (SQLException e) {
-            System.out.println("Some error was occurred while removing the user!!!");
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
     }
@@ -130,8 +117,7 @@ public class UserDaoJDBCImpl implements UserDao {
             }
 
         } catch (SQLException e) {
-            System.out.println("Some error was occurred while getting all users!!!");
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
         return users;
@@ -147,8 +133,7 @@ public class UserDaoJDBCImpl implements UserDao {
 //            System.out.println("Table was cleaned");
 
         } catch (SQLException e) {
-            System.out.println("Some error was occurred while cleaning the table!!!");
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
     }

@@ -29,6 +29,7 @@ public class Main {
 
         userServiceImpl.dropUsersTable();
 
+
 //----------------OTHER TESTS----------------
 //        userServiceImpl.dropUsersTable();
 //
